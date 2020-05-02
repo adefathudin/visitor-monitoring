@@ -46,7 +46,7 @@ class Migration_add_visitor_history extends MY_Migration {
             'type' => 'TIME'
         ),
         'jam_out'    => array(
-            'type' => 'DATE'
+            'type' => 'TIME'
         ),
     );
 
