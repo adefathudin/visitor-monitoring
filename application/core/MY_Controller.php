@@ -11,8 +11,6 @@ class MY_Controller extends CI_Controller {
             $this->load->library('session') or die('Can not load library Session');
         }
         
-        $this->load->model('users_detail_m');
-        $this->userlib = new Userlib();       
         
         $this->data['user_id'] = $this->session->userdata('user_id');
         
