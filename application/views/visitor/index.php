@@ -36,7 +36,6 @@
         
     </div>
     
-    
 <script type="text/javascript">
     var JS = {
         Init: function(){
@@ -58,7 +57,7 @@
                                 dt.ajax.reload( null, false );
                             }
                         },
-                                {
+                        {
                             extend: 'print',
                             text: '<i class=" mdi mdi-cloud-print"></i> Print',
                             className:'btn btn-default btn-sm',

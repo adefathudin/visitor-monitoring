@@ -6,7 +6,7 @@ class Visitors extends REST_Controller {
 
     function __construct($config = 'rest') {
         parent::__construct($config);
-        $this->load->model(['visitor_history_m', 'visitor_detail_m']);
+        $this->load->model(['visitor_history_m', 'visitor_detail_m', 'visitor_card_m']);
     }
 
     public function index() {
@@ -66,9 +66,15 @@ class Visitors extends REST_Controller {
             $this->response($output);
         }
         
-        if ($this->visitor_history_m->get_count(['rfid_visitor_card' => $visitor_card, 'checkout' => 0])){
+        if ($this->visitor_card_m->get_count(['rfid_visitor_card' => $visitor_card, 'status' => 1])){
             $output['status'] = false;
             $output['message'] = "Kartu visitor sudah digunakan! Harap pakai kartu visitor lain";
+            $this->response($output);
+        }
+        
+        if (!$this->visitor_card_m->get_count(['rfid_visitor_card' => $visitor_card])){
+            $output['status'] = false;
+            $output['message'] = "Kartu visitor tidak terdaftar";
             $this->response($output);
         }
 
@@ -96,6 +102,7 @@ class Visitors extends REST_Controller {
 
         if ($insert_data_visitor_detail) {
             $this->visitor_history_m->save($data_visitor_history);
+            $this->visitor_card_m->save(['status' => 1], $visitor_card);
             $output['status'] = true;
             $output['message'] = "Data Berhasil Disimpan";
         } else {
@@ -142,7 +149,8 @@ class Visitors extends REST_Controller {
         
         $update = $this->visitor_history_m->save($data_checkout, $id_visitor);
 
-        if ($update) {
+        if ($update) {             
+            $this->visitor_card_m->save(['status' => 0], $visitor_card);
             $output['status'] = true;
             $output['message'] = "Visitor berhasil checkout";            
         } else {
@@ -177,6 +185,18 @@ class Visitors extends REST_Controller {
         $status_profesi = $this->get('status_profesi');
         $nama_perusahaan = $this->get('nama_perusahaan');
         $keperluan = $this->get('keperluan');
+        
+        if ($this->visitor_card_m->get_count(['rfid_visitor_card' => $visitor_card, 'status' => 1])){
+            $output['status'] = false;
+            $output['message'] = "Kartu visitor sudah digunakan! Harap pakai kartu visitor lain";
+            $this->response($output);
+        }
+        
+        if (!$this->visitor_card_m->get_count(['rfid_visitor_card' => $visitor_card])){
+            $output['status'] = false;
+            $output['message'] = "Kartu visitor tidak terdaftar";
+            $this->response($output);
+        }
             
         $data_checkin = [
             'rfid_id_card' => $id_card,
@@ -192,6 +212,7 @@ class Visitors extends REST_Controller {
         $insert = $this->visitor_history_m->save($data_checkin);
 
         if ($insert) {
+            $this->visitor_card_m->save(['status' => 1], $visitor_card);
             $output['status'] = true;
             $output['message'] = "Visitor berhasil checkin";            
         } else {
@@ -257,7 +278,7 @@ class Visitors extends REST_Controller {
             if ($this->visitor_history_m->get_by(['rfid_id_card' => $id_card, 'checkout' => 0])) {
 
                 $output['status'] = false;
-                $output['message'] = "User ini belum melakukan checkout. Harap checkout telebih dahulu";
+                $output['message'] = "User ini tidak dapat dinonaktifkan. User belum melakukan checkout. Harap checkout telebih dahulu";
                 $this->response($output);
             }
             

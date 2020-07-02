@@ -94,7 +94,7 @@
                             <input type="text" name="keperluan" class="form-control" placeholder="Keperluan">    
                         </div>                       
                         <div class="form-group">
-                            <input type="text" name="visitor_card" class="form-control" placeholder="Tap visitor card">    
+                            <input type="password" name="visitor_card" class="form-control visitor-card" placeholder="Tap visitor card">    
                         </div>
                     </div>
                 </div>
@@ -138,6 +138,7 @@
                             timer: 1300
                         })
                     } else {
+                        $('.visitor-card').val('');
                         Swal.fire({
                             position: 'center',
                             icon: 'warning',
@@ -236,7 +237,7 @@
                             timer: 1300
                         })
                     }
-                    $(".btn-save-checkin-visitor").removeAttr('disabled').html('checkout');
+                    $(".btn-save-checkin-visitor").removeAttr('disabled').html('checkin');
 
 
                 }
@@ -283,9 +284,20 @@
                         
                         $('#modalAddVisitor').modal('show');  
                         
+                        
                     } else if (data.ada == 'null'){
                         
-                        alert('harap tap id card!');
+                        Swal.fire(
+                            'Harap tap id card!',
+                            'error'
+                        )
+                        
+                    } else if (!data.status){
+                        
+                        Swal.fire(
+                            data.message,
+                            'error'
+                        )
                         
                     } else {
                         
@@ -326,7 +338,7 @@
                             '<tr><td>Keperluan</td><td>:</td><td>'+data.item[i].tujuan+'</td></tr>  '+
                             '<tr><td>Tanggal Masuk</td><td>:</td><td>'+data.item[i].tanggal_in+'</td></tr>  '+
                             '<tr><td>Jam</td><td>:</td><td>'+data.item[i].jam_in+'</td></tr>  '+
-                            '<tr><td>Tap ID Card</td><td>:</td><td><input type="text" name="id_card" class="form-control" palceholder="Tap ID Card"></td></tr> ';
+                            '<tr><td>Tap ID Card</td><td>:</td><td><input type="password" name="id_card" class="form-control" palceholder="Tap ID Card"></td></tr> ';
                 }
 
                 $('.tblDetailVisitor').html(html);

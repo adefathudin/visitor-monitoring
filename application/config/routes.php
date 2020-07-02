@@ -61,7 +61,7 @@ $route['translate_uri_dashes'] = TRUE;
 $route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
 $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
 
-$route['default_controller'] = 'dashboard';
+$route['default_controller'] = 'auth';
 $route['user/(:any)'] = '/profile/user/id/$1';
 $route['grup/(:any)/(:any)'] = '/koperasi/grup/id/$1/$1';
 $route['404_override'] = '';

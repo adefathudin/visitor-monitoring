@@ -35,7 +35,7 @@ class Userlib extends Library {
      * @return boolean
      */
         
-    public function isLoggedin() {
+    public function has_loggedin() {
         return $this->CI->session->userdata($this->_prefix_session . 'has_loggedin')!==NULL ? TRUE : FALSE;
     }
     
@@ -43,11 +43,12 @@ class Userlib extends Library {
         $this->CI->session->userdata();
     }
     
-    public function login($email, $password){
+    public function login($nik, $password){
+        
         $this->CI->load->model(['users_login_m']);
         
         //query ke database apakah ada account dengan username dan password yg sesuai
-        $user = $this->CI->users_login_m->get_by(['email' => $email, 'password' => $password], TRUE);
+        $user = $this->CI->users_login_m->get_by(['nik' => $nik, 'password' => $password], TRUE);
         
         if (!$user) {
             $this->last_message = 'Username/Password tidak ditemukan.';
