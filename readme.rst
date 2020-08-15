@@ -9,4 +9,4 @@ Aplikasi koperasi simpan pinjam ini dibangun menggunakan framework Codeigniter u
  - Clone
  - Masuk ke direktori aplikasi, lalu ketik php index.php migrate index 005 untuk export database
  
- https://www.adefathudin.com/2020/08/aplikasi-visitor-monitoring-menggunakan-framework-codeigniter.html
+more detail : https://www.adefathudin.com/2020/08/aplikasi-visitor-monitoring-menggunakan-framework-codeigniter.html
