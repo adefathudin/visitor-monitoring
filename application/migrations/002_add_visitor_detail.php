@@ -6,6 +6,7 @@ class Migration_add_visitor_detail extends MY_Migration {
     protected $_primary_key = 'id';
     protected $_index_keys = array();
     protected $_fields = array(
+        
         'id'    => array (
             'type'  => 'INT',
             'constraint' => 12,
@@ -26,7 +27,7 @@ class Migration_add_visitor_detail extends MY_Migration {
         ),
         'status_profesi'    => array(
             'type' => 'VARCHAR',
-            'constraint' => 50
+            'constraint' => 30
         ),
         'nama_perusahaan'    => array(
             'type' => 'VARCHAR',
@@ -37,7 +38,8 @@ class Migration_add_visitor_detail extends MY_Migration {
             'constraint' => 12
         ),
         'blokir'    => array(
-            'type' => 'BOOLEAN',
+            'type' => 'INT',            
+            'constraint' => 1,
             'default'   => 0
         )
     );

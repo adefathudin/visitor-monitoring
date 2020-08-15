@@ -22,7 +22,7 @@ class Migration_add_visitor_history extends MY_Migration {
         ),
         'status_profesi'    => array(
             'type' => 'VARCHAR',
-            'constraint' => 50
+            'constraint' => 30
         ),
         'nama_perusahaan'    => array(
             'type' => 'VARCHAR',
@@ -33,7 +33,8 @@ class Migration_add_visitor_history extends MY_Migration {
             'constraint' => 150
         ),
         'checkout'    => array(
-            'type' => 'BOOLEAN',
+            'type' => 'INT',
+            'constraint' => 1,
             'default' => 0
         ),
         'tanggal_in'    => array(
@@ -47,7 +48,7 @@ class Migration_add_visitor_history extends MY_Migration {
         ),
         'jam_out'    => array(
             'type' => 'TIME'
-        ),
+        )
     );
 
 }
